@@ -1,7 +1,7 @@
 package poateto.final4j.Repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import poateto.final4j.DB.LMDBController;
+import poateto.final4j.DB.LMdatabase;
 import poateto.final4j.Entity.LM;
 
 import java.util.List;
@@ -9,18 +9,48 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class InMemoryLMRepository implements LMRepository {
-    private LMDBController dbController = new LMDBController();
+    private List<LM> LMs;
+    private LMdatabase db = new LMdatabase();
+    private static final String LAYER_NAME = "Repository";
 
-    public String saveLM(LM lm) throws ExecutionException, InterruptedException {
-        return dbController.saveLM(lm);
+    public InMemoryLMRepository() {
+        loadLMs();
     }
 
-    public List<LM> getAllLMs() throws ExecutionException, InterruptedException {
-        return dbController.getAllLMs();
+    public void loadLMs() {
+        try {
+            LMs = db.getAllLMs();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public String modifyLMWeightByName(LM lm, int value) throws ExecutionException, InterruptedException {
+    public String saveLM(LM lm) {
+        String msg;
+        try {
+            msg = db.saveLM(lm);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+        loadLMs();
+        return msg;
+    }
+
+    public List<LM> getAllLMs() {
+        return LMs;
+    }
+
+    public String modifyLMWeightByName(LM lm, int value) {
         lm.modifyWeight(value);
-        return dbController.updateLM(lm);
+        String msg;
+        try {
+            msg = db.updateLM(lm);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
+        loadLMs();
+        return msg;
     }
 }

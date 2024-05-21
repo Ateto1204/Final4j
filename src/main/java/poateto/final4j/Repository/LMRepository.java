@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutionException;
 
 public interface LMRepository {
 
-    String saveLM(LM lm) throws ExecutionException, InterruptedException;
-    List<LM> getAllLMs() throws ExecutionException, InterruptedException;
-    String modifyLMWeightByName(LM lm, int value) throws ExecutionException, InterruptedException;
+    String saveLM(LM lm);
+    List<LM> getAllLMs();
+    String modifyLMWeightByName(LM lm, int value);
 }

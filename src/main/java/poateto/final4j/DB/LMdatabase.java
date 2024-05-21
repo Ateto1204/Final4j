@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class LMDBController {
+public class LMdatabase {
     private static final String COLLECTION_NAME = "lms";
 
     public String saveLM(LM lm) throws ExecutionException, InterruptedException {
