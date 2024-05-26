@@ -1,17 +1,13 @@
 package poateto.final4j.Repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import poateto.final4j.DB.LMdatabase;
 import poateto.final4j.Entity.LM;
 
 import java.util.List;
-import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 public class InMemoryLMRepository implements LMRepository {
     private List<LM> LMs;
     private LMdatabase db = new LMdatabase();
-    private static final String LAYER_NAME = "Repository";
 
     public InMemoryLMRepository() {
         loadLMs();
