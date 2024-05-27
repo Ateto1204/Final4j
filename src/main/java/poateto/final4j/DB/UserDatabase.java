@@ -42,4 +42,16 @@ public class UserDatabase {
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getEmail()).set(user);
         return collectionApiFuture.get().getUpdateTime().toString();
     }
+
+    public String sendMessage(User user) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getEmail()).set(user);
+        return collectionApiFuture.get().getUpdateTime().toString();
+    }
+
+    public String responseMessage(User user) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getEmail()).set(user);
+        return collectionApiFuture.get().getUpdateTime().toString();
+    }
 }

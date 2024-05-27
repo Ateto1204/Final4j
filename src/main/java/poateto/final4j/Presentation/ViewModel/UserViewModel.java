@@ -1,30 +1,42 @@
 package poateto.final4j.Presentation.ViewModel;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import poateto.final4j.Entity.NotifyStatus;
+import poateto.final4j.UseCases.NotifyStatus;
 import poateto.final4j.Entity.User;
 import poateto.final4j.UseCases.UserService;
+import poateto.final4j.UseCases.UserUseCase;
 
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserViewModel {
-    private UserService service = new UserService();
+    private UserUseCase service;
 
-    @PostMapping("/user")
+    public UserViewModel() {
+        this.service = new UserService();
+    }
+
+    @PostMapping
     public String saveUser(@RequestBody User user) throws ExecutionException, InterruptedException {
         return service.saveUser(user);
     }
 
-    @GetMapping("/user/{email}")
+    @PostMapping("/{email}")
+    public String sendMessage(@PathVariable String email,
+                              @RequestParam String msg) throws ExecutionException, InterruptedException {
+        return service.sendMessage(email, msg);
+    }
+
+    @GetMapping("/{email}")
     public User getUserByEmail(@PathVariable String email) throws ExecutionException, InterruptedException {
         return service.getUserByEmail(email);
     }
 
-    @PutMapping("/user/{email}/{model}/{status}")
-    public String increaseWeight(@PathVariable String email, @PathVariable String model, @PathVariable NotifyStatus status) throws ExecutionException, InterruptedException {
+    @PutMapping("/{email}")
+    public String increaseWeight(@PathVariable String email,
+                                 @RequestParam String model,
+                                 @RequestParam NotifyStatus status) throws ExecutionException, InterruptedException {
         return service.notifyModel(email, model, status);
     }
 }

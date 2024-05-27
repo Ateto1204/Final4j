@@ -28,4 +28,20 @@ public class InMemoryUserRepository implements UserRepository {
         String msg = db.notifyModel(user);
         return msg;
     }
+
+    @Override
+    public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
+        user = db.getUserByEmail(email);
+        user.sentMsg(message);
+        String msg = db.sendMessage(user);
+        return msg;
+    }
+
+    @Override
+    public String responseMessage(String email, String message) throws ExecutionException, InterruptedException {
+        user = db.getUserByEmail(email);
+        user.responsedMsg(message);
+        String msg = db.sendMessage(user);
+        return msg;
+    }
 }
