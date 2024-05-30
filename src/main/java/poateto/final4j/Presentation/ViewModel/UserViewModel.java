@@ -18,7 +18,7 @@ public class UserViewModel {
     }
 
     @PostMapping
-    public String saveUser(@RequestBody User user) throws ExecutionException, InterruptedException {
+    public User saveUser(@RequestBody User user) throws ExecutionException, InterruptedException {
         return service.saveUser(user);
     }
 

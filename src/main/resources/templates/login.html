@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login and Register Page</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="/css/login.css">
     <script src="/js/login.js"></script>
 </head>
 <body>
     <div class="form-container">
         <div class="form-toggle">
-            <button id="loginBtn">Login</button>
-            <button id="registerBtn">Register</button>
+            <button id="login-toggle">Login</button>
+            <button id="register-toggle">Register</button>
         </div>
         <div class="form-content">
-            <div id="login-form" class="form">
+            <div id="login-div" class="form">
                 <h2>Login</h2>
-                <form>
+                <form id="login-form">
                     <div class="input-group">
-                        <label for="login-username">Username</label>
-                        <input type="text" id="login-username" name="username" required>
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" required>
                     </div>
                     <div class="input-group">
                         <label for="login-password">Password</label>
                         <input type="password" id="login-password" name="password" required>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" id="loginBtn">Login</button>
                 </form>
             </div>
-            <div id="register-form" class="form hidden">
+            <div id="register-div" class="form hidden">
                 <h2>Register</h2>
-                <form>
+                <form id="register-form">
                     <div class="input-group">
                         <label for="register-username">Username</label>
                         <input type="text" id="register-username" name="username" required>
@@ -43,7 +43,7 @@
                         <label for="register-password">Password</label>
                         <input type="password" id="register-password" name="password" required>
                     </div>
-                    <button type="submit">Register</button>
+                    <button type="submit" id="registerBtn">Register</button>
                 </form>
             </div>
         </div>
