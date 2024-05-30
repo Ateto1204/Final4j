@@ -12,7 +12,7 @@ public class UserService implements UserUseCase {
     private UserRepository repository = new InMemoryUserRepository();
 
     @Override
-    public String saveUser(User user) throws ExecutionException, InterruptedException {
+    public User saveUser(User user) throws ExecutionException, InterruptedException {
         return repository.saveUser(user);
     }
 
