@@ -1,22 +1,22 @@
-let count = 0;
+let count = 0, msgCount = 0;
 let userName, userEmail;
 
 function start(){
+    count = 0;
+    msgCount = 1;
     userName = localStorage.getItem("name");
     userEmail = localStorage.getItem("email");
+    console.log(userName);
     console.log(userEmail);
-    if(userEmail == null){
+    if(userEmail == null)
         window.location.href = "http://localhost:8080/login";
-    }
+    else
+        document.getElementById("userName").innerHTML = userName;
 
-    count = 0;
-    const clickBtn = document.getElementById("clickBtn");
-    clickBtn.addEventListener("click", move_leftPage, false);
-
-    const inputBtn = document.getElementById("inputBtn");
-    const text = document.getElementById("inputText");
-    inputBtn.addEventListener("click", getInputMessage, false);
-    text.addEventListener("keydown", function(event){
+    document.getElementById("logoutBtn").addEventListener("click", logout, false);
+    document.getElementById("clickBtn").addEventListener("click", move_leftPage, false);
+    document.getElementById("inputBtn").addEventListener("click", getInputMessage, false);
+    document.getElementById("inputText").addEventListener("keydown", function(event){
         if(event.key == "Enter"){
             if(event.shiftKey)
                 text.value += "";
@@ -24,6 +24,11 @@ function start(){
                 getInputMessage();
         }
     });
+}
+
+function logout(){
+    localStorage.clear();
+    window.location.href = "http://localhost:8080/login";
 }
 
 function move_leftPage(){

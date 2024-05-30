@@ -146,3 +146,47 @@ body {
     border-radius: 5px;
     background-color: #eee;
 }
+
+.userDiv {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 160px;
+}
+
+.userIcon {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+.userInfo {
+    width: 160px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #eee;
+}
+
+.userDiv:hover .userInfo {
+    display: flex;
+}
+
+#userName, #logoutBtn {
+    width: 150px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#logoutBtn {
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+#userName:hover, #logoutBtn:hover {
+    background-color: #aaa;
+}
