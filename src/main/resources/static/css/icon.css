@@ -1,0 +1,41 @@
+.like-option {
+    background-color: white;
+    display: flex;
+}
+
+.iconDiv {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    border-radius: 50%;
+    object-fit: contain;
+    cursor: pointer;
+    text-align: center;
+}
+
+.like {
+    line-height: 35px;
+}
+.dislike {
+    line-height: 40px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.like:hover {
+    transform: scale(1.1);
+    background-color: #007BFF;
+}
+.dislike:hover {
+    transform: scale(1.1);
+    background-color: #aaaaaa;
+}
+.like.active {
+    background-color: #007BFF;
+}
+.dislike.active {
+    background-color: #aaaaaa;
+}
