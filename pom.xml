@@ -33,8 +33,18 @@
 		</dependency>
 		<dependency>
 			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-anthropic</artifactId>
+			<version>0.31.0</version>
+		</dependency>
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
 			<artifactId>langchain4j</artifactId>
 			<version>0.31.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.cohere</groupId>
+			<artifactId>cohere-java</artifactId>
+			<version>1.0.4</version>
 		</dependency>
 
 		<dependency>

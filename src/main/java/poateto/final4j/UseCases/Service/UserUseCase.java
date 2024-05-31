@@ -1,6 +1,7 @@
-package poateto.final4j.UseCases;
+package poateto.final4j.UseCases.Service;
 
 import poateto.final4j.Entity.User;
+import poateto.final4j.UseCases.Components.NotifyStatus;
 
 import java.util.concurrent.ExecutionException;
 
