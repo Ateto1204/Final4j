@@ -62,9 +62,9 @@ function addMessage(message, sender){
 }
 
 async function sendMessageToLM(message) {
-    let url = "http://localhost:8080/api/user/" + userEmail + "?msg=" + message;
+    let url = "http://localhost:8080/api/user/send/" + userEmail + "?msg=" + message;
     try{
-        const response = await fetch(url, {method: "POST"});
+        const response = await fetch(url, {method: "GET"});
         const responseMsg = await response.text();
         console.log(responseMsg);
         addBotMessage(responseMsg);
