@@ -11,10 +11,9 @@ public class InMemoryUserRepository implements UserRepository {
     private UserDatabase db = new UserDatabase();
 
     @Override
-    public String saveUser(User user) throws ExecutionException, InterruptedException {
+    public User saveUser(User user) throws ExecutionException, InterruptedException {
         String msg = db.saveUser(user);
-        getUserByEmail(user.getEmail());
-        return msg;
+        return getUserByEmail(user.getEmail());
     }
     @Override
     public User getUserByEmail(String email) throws ExecutionException, InterruptedException {

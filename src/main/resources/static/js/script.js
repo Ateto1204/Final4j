@@ -1,6 +1,14 @@
-var count = 0;
+let count = 0;
+let userName, userEmail;
 
 function start(){
+    userName = localStorage.getItem("name");
+    userEmail = localStorage.getItem("email");
+    console.log(userEmail);
+    if(userEmail == null){
+        window.location.href = "http://localhost:8080/login";
+    }
+
     count = 0;
     const clickBtn = document.getElementById("clickBtn");
     clickBtn.addEventListener("click", move_leftPage, false);
@@ -24,7 +32,7 @@ function move_leftPage(){
     count++;
 
     if(count % 2){
-        for(var i=0, w = 0; i<25; i++){
+        for(let i=0, w = 0; i<25; i++){
             window.setTimeout(() => {
                 w++;
                 // console.log(w);
@@ -34,7 +42,7 @@ function move_leftPage(){
         }
     }
     else{
-        for(var i=0, w=25; i<25; i++){
+        for(let i=0, w=25; i<25; i++){
             window.setTimeout(() => {
                 w--;
                 // console.log(w);
@@ -69,9 +77,9 @@ function addBotMessage(message){
 
 function isMessage(message){
     const it = message[Symbol.iterator]();
-    var theChar = it.next();
+    let theChar = it.next();
 
-    var check = false;
+    let check = false;
     while(!theChar.done){
         if(theChar.value != '\n' && theChar.value != ' ')
             check = true;
@@ -81,9 +89,9 @@ function isMessage(message){
 }
 
 function toMessage(message) {
-    var output = "";
+    let output = "";
     const it = message[Symbol.iterator]();
-    var theChar = it.next();
+    let theChar = it.next();
 
     while(!theChar.done){
         if(theChar.value == '\n')

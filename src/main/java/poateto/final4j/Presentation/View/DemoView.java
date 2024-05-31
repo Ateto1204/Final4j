@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DemoView {
 
-    @GetMapping("/index")
-    public String index() {
-        return "index";
+    @GetMapping("/chatBot")
+    public String chatBot() {
+        return "chatBot";
     }
 
     @GetMapping("/login")
