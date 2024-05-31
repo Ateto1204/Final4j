@@ -1,10 +1,10 @@
 package poateto.final4j.Presentation.ViewModel;
 
 import org.springframework.web.bind.annotation.*;
-import poateto.final4j.UseCases.NotifyStatus;
+import poateto.final4j.UseCases.Components.NotifyStatus;
 import poateto.final4j.Entity.User;
-import poateto.final4j.UseCases.UserService;
-import poateto.final4j.UseCases.UserUseCase;
+import poateto.final4j.UseCases.Service.UserService;
+import poateto.final4j.UseCases.Service.UserUseCase;
 
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +22,7 @@ public class UserViewModel {
         return service.saveUser(user);
     }
 
-    @PostMapping("/{email}")
+    @GetMapping("/send/{email}")
     public String sendMessage(@PathVariable String email,
                               @RequestParam String msg) throws ExecutionException, InterruptedException {
         return service.sendMessage(email, msg);

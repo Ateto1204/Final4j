@@ -1,15 +1,21 @@
-package poateto.final4j.UseCases;
+package poateto.final4j.UseCases.Service;
 
-import static poateto.final4j.UseCases.NotifyStatus.*;
+import static poateto.final4j.UseCases.Components.NotifyStatus.*;
 
 import poateto.final4j.Entity.User;
 import poateto.final4j.Repository.InMemoryUserRepository;
 import poateto.final4j.Repository.UserRepository;
+import poateto.final4j.UseCases.Components.LanguageModelType;
+import poateto.final4j.UseCases.Components.NotifyStatus;
+import poateto.final4j.UseCases.LanguageModel.LanguageModelHandler;
 
 import java.util.concurrent.ExecutionException;
 
+import static poateto.final4j.UseCases.Components.LanguageModelType.*;
+
 public class UserService implements UserUseCase {
     private UserRepository repository = new InMemoryUserRepository();
+    private LanguageModelHandler handler = new LanguageModelHandler();
 
     @Override
     public User saveUser(User user) throws ExecutionException, InterruptedException {
@@ -35,7 +41,11 @@ public class UserService implements UserUseCase {
     @Override
     public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
         repository.sendMessage(email, message);
-        String response = "demo response";
+
+        // TODO
+        LanguageModelType selectModel = OPENAI;
+
+        String response = handler.sendMessage(selectModel, message);
         return response;
     }
 }
