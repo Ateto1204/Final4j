@@ -43,4 +43,9 @@ public class InMemoryUserRepository implements UserRepository {
         String msg = db.sendMessage(user);
         return msg;
     }
+
+    @Override
+    public User getUser(){
+        return user;
+    }
 }
