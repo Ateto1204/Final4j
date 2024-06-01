@@ -2,17 +2,17 @@ package poateto.final4j.UseCases.LanguageModel;
 
 import com.google.cloud.vertexai.VertexAI;
 import com.google.cloud.vertexai.api.GenerateContentResponse;
-import com.google.cloud.vertexai.generativeai.preview.ContentMaker;
 import com.google.cloud.vertexai.generativeai.preview.GenerativeModel;
-import com.google.cloud.vertexai.generativeai.preview.PartMaker;
 import com.google.cloud.vertexai.generativeai.preview.ResponseHandler;
+
+import static poateto.final4j.UseCases.Components.ApiKeySet.*;
 
 import java.io.IOException;
 
 public class GeminiModel implements LanguageModelUseCase {
-    private final String projectId = "demo";
-    private final String location = "demo";
-    private final String modelName = "demo";
+    private final String projectId = GEMINI_projectId;
+    private final String location = GEMINI_location;
+    private final String modelName = GEMINI_modelName;
 
     private GeminiModel() {
 

@@ -22,7 +22,7 @@ public class UserViewModel {
         return service.saveUser(user);
     }
 
-    @GetMapping("/send/{email}")
+    @GetMapping("/send/{email}") // request body: email, pwd, prompt; return: response, model
     public String sendMessage(@PathVariable String email,
                               @RequestParam String msg) throws ExecutionException, InterruptedException {
         return service.sendMessage(email, msg);
@@ -33,7 +33,7 @@ public class UserViewModel {
         return service.getUserByEmail(email);
     }
 
-    @PutMapping("/{email}")
+    @PutMapping("/{email}") // request body: email, pwd, model, status
     public String increaseWeight(@PathVariable String email,
                                  @RequestParam String model,
                                  @RequestParam NotifyStatus status) throws ExecutionException, InterruptedException {

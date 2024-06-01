@@ -7,6 +7,7 @@ import java.util.Map;
 public class User {
     private String email;
     private String name;
+    private String pwd;
     private List<String> sentMsg;
     private List<String> responsedMsg;
     private Map<String, Double> models;
@@ -41,6 +42,10 @@ public class User {
     }
     public List<String> getSentMsg() {
         return sentMsg;
+    }
+
+    public boolean checkPwd(String pwd) {
+        return this.pwd.equals(pwd);
     }
 
     public void responsedMsg(String msg) {
