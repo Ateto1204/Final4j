@@ -84,6 +84,7 @@ async function userLogin(event) {
         alert("Login successfully");
         localStorage.setItem('name', myName);
         localStorage.setItem('email', email);
+        localStorage.setItem('enter', "true");
         window.location.href = "http://localhost:8080/chatBot";
     }
     else{
@@ -108,10 +109,10 @@ async function userRegister(event) {
     }
 
     if(await saveUser(name, email) == true){
-        alert("Login successfully");
+        alert("Register successfully");
         localStorage.setItem('name', myName);
         localStorage.setItem('email', email);
-        localStorage.setItem('userEmail', email);
+        localStorage.setItem('enter', "true");
         window.location.href = "http://localhost:8080/chatBot";
     }
 }

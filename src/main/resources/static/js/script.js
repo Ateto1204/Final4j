@@ -1,17 +1,20 @@
-let msgCount = 0;
-let userName, userEmail;
+let msgNumber = 0;
+let userName, userEmail, enter;
 
 function start(){
-    msgCount = 1;
+    msgNumber = 1;
     userName = localStorage.getItem("name");
     userEmail = localStorage.getItem("email");
+    enter = localStorage.getItem("enter");
     console.log(userName);
     console.log(userEmail);
+    console.log(enter);
 
-    if(userEmail == null)
+    if(enter == null)
         window.location.href = "http://localhost:8080/login";
-    else
-        document.getElementById("userName").innerHTML = userName;
+
+    document.getElementById("userName").innerHTML = userName;
+    localStorage.removeItem("enter");
 
     // document.getElementById("clickBtn").addEventListener("click", move_leftPage, false);
     document.getElementById("logoutBtn").addEventListener("click", logout, false);

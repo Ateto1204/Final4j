@@ -19,7 +19,7 @@ function addBotMessage(message){
     if(isMessage(message)){
         addMessage(toMessage(message), "bot");
         addLikeIcon();
-        msgCount++;
+        msgNumber++;
     }
 }
 
@@ -56,7 +56,7 @@ function addMessage(message, sender){
     const messageElement = document.createElement("div");
     messageElement.classList.add(sender);
     if(sender == "bot")
-        messageElement.setAttribute("id", "msg"+msgCount);
+        messageElement.setAttribute("id", "msg"+msgNumber);
     messageElement.innerHTML = message;
     chatBox.appendChild(messageElement);
 }

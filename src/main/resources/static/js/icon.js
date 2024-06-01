@@ -2,10 +2,10 @@ function addLikeIcon() {
     const chatBox = document.getElementById("chatBox");
     const messageElement = document.createElement("div");
     messageElement.classList.add("like-option");
-    messageElement.innerHTML = "<div class=\"iconDiv like\" id=\"like"+msgCount+"\" onclick=\"increaseWeight("+msgCount+")\">\n" +
+    messageElement.innerHTML = "<div class=\"iconDiv like\" id=\"like"+msgNumber+"\" onclick=\"increaseWeight("+msgNumber+")\">\n" +
         "                        <img src=\"/img/like.png\" class=\"icon\" alt=\"Like Icon\"/>\n" +
         "                    </div>\n" +
-        "                    <div class=\"iconDiv dislike\" id=\"dislike"+msgCount+"\" onclick=\"decreaseWeight("+msgCount+")\">\n" +
+        "                    <div class=\"iconDiv dislike\" id=\"dislike"+msgNumber+"\" onclick=\"decreaseWeight("+msgNumber+")\">\n" +
         "                        <img src=\"/img/dislike.png\" class=\"icon\" alt=\"Dislike Icon\"/>\n" +
         "                    </div>";
     chatBox.appendChild(messageElement);
