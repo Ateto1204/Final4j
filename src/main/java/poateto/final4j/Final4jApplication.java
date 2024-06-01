@@ -7,12 +7,14 @@ import org.springframework.context.event.EventListener;
 
 import java.awt.*;
 import java.net.URI;
+import poateto.final4j.UseCases.Components.ApiKeySet;
 
 @SpringBootApplication
 public class Final4jApplication {
 
 	public static void main(String[] args) {
 //		System.setProperty("java.awt.headless", "false");
+		ApiKeySet.init();
 		SpringApplication.run(Final4jApplication.class, args);
 	}
 

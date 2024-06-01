@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient;
 import poateto.final4j.UseCases.Components.LanguageModelType;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static poateto.final4j.UseCases.Components.LanguageModelType.*;
 
@@ -23,12 +24,16 @@ public class LanguageModelHandler {
 
     public String sendMessage(LanguageModelType model, String prompt) {
         String response = "error";
-        if (model == OPENAI) {
-            response = openai.sendMessage(prompt);
-        } else if (model == COHERE) {
-            response = cohere.sendMessage(prompt);
-        } else if (model == GEMINI) {
-            response = gemini.sendMessage(prompt);
+        try {
+            if (model == OPENAI) {
+                response = openai.sendMessage(prompt);
+            } else if (model == COHERE) {
+                response = cohere.sendMessage(prompt);
+            } else if (model == GEMINI) {
+                response = gemini.sendMessage(prompt);
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         return response;
     }

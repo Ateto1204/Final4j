@@ -34,3 +34,4 @@ build/
 
 ### API Key ###
 *.json
+*.properties
