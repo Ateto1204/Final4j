@@ -8,15 +8,16 @@ import java.util.concurrent.TimeUnit;
 import static poateto.final4j.UseCases.Components.LanguageModelType.*;
 
 public class LanguageModelHandler {
-    CohereModel cohere = CohereModel.getInstance();
-    OpenAiModel openai = OpenAiModel.getInstance();
-    OkHttpClient client;
+    private CohereModel cohere = CohereModel.getInstance();
+    private OpenAiModel openai = OpenAiModel.getInstance();
+    private GeminiModel gemini = GeminiModel.getInstance();
+    private OkHttpClient client;
 
     public LanguageModelHandler() {
         client = new OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(40, TimeUnit.SECONDS)
+                .readTimeout(40, TimeUnit.SECONDS)
+                .writeTimeout(40, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -26,6 +27,8 @@ public class LanguageModelHandler {
             response = openai.sendMessage(prompt);
         } else if (model == COHERE) {
             response = cohere.sendMessage(prompt);
+        } else if (model == GEMINI) {
+            response = gemini.sendMessage(prompt);
         }
         return response;
     }

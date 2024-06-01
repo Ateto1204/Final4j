@@ -8,6 +8,8 @@ import poateto.final4j.Repository.UserRepository;
 import poateto.final4j.UseCases.Components.LanguageModelType;
 import poateto.final4j.UseCases.Components.NotifyStatus;
 import poateto.final4j.UseCases.LanguageModel.LanguageModelHandler;
+import java.util.Map;
+import java.util.Random;
 
 import java.util.concurrent.ExecutionException;
 
@@ -42,9 +44,18 @@ public class UserService implements UserUseCase {
     public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
         repository.sendMessage(email, message);
 
-        // TODO
-        LanguageModelType selectModel = OPENAI;
+        LanguageModelType selectModel;
+        Map<String,Double>allModels = repository.getUser().getModels();
+        double sum = allModels.get("OPENAI") + allModels.get("COHERE");
+        Random random = new Random();
+        double pick = sum * random.nextDouble();
 
+        // TODO
+        if (pick < allModels.get("OPENAI")) {
+            selectModel = OPENAI;
+        } else {
+            selectModel = COHERE;
+        }
         String response = handler.sendMessage(selectModel, message);
         return response;
     }
