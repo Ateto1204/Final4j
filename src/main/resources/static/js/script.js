@@ -1,5 +1,6 @@
+const port = window.location.port;
 let msgNumber = 0;
-let userName, userEmail, enter;
+let userName, userEmail, userPassword, enter;
 
 function start(){
     msgNumber = 1;
@@ -11,7 +12,7 @@ function start(){
     console.log(enter);
 
     if(enter == null)
-        window.location.href = "http://localhost:8080/login";
+        window.location.href = "http://localhost:" +　port + "/login";
 
     document.getElementById("userName").innerHTML = userName;
     localStorage.removeItem("enter");
@@ -56,7 +57,7 @@ function start(){
 
 function logout(){
     localStorage.clear();
-    window.location.href = "http://localhost:8080/login";
+    window.location.href = "http://localhost:" + port + "/login";
 }
 
 window.addEventListener("load", start, false);

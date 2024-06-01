@@ -22,3 +22,23 @@ function decreaseWeight(id) {
     document.getElementById("dislike"+id).classList.add('active');
     console.log("dislike" + id);
 }
+
+async function modifyWeight(model, status) {
+    let url = "http://localhost:" + port + "/api/user/modify";
+    let body = {
+        "email": userEmail,
+        "password": userPassword,
+        "model": model,
+        "status": status
+    }
+
+    try{
+        const response = await fetch(url, {
+            method: "PUT",
+            body: JSON.stringify(body)});
+        const data = await response.text();
+        console.log(data.response);
+    }catch(err){
+        console.log("Failed: " + err);
+    }
+}
