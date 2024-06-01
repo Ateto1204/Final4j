@@ -18,8 +18,8 @@ public class GeminiModel implements LanguageModelUseCase {
 
     }
 
-    private static GeminiModel instance = new GeminiModel();
-    public static GeminiModel getInstance() {
+    private static LanguageModelUseCase instance = new GeminiModel();
+    public static LanguageModelUseCase getInstance() {
         return instance;
     }
 

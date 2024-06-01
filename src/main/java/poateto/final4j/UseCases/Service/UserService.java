@@ -52,9 +52,11 @@ public class UserService implements UserUseCase {
         
         if (pick < allModels.get("OPENAI")) {
             selectModel = OPENAI;
-        } else if(pick < allModels.get("OPENAI") + allModels.get("COHERE")){
+        } else if (pick < allModels.get("OPENAI") + allModels.get("COHERE")) {
             selectModel = COHERE;
-        }else selectModel = GEMINI;
+        } else {
+            selectModel = GEMINI;
+        }
 
         String response = handler.sendMessage(selectModel, message);
         return response;
