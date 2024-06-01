@@ -44,15 +44,18 @@ public class UserService implements UserUseCase {
     public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
         repository.sendMessage(email, message);
 
-        // TODO
         LanguageModelType selectModel;
-        Map<String,Double>allModels= repository.getUser().getModels();
-        double sum=allModels.get("OPENAI")+allModels.get("COHERE");
+        Map<String,Double>allModels = repository.getUser().getModels();
+        double sum = allModels.get("OPENAI") + allModels.get("COHERE");
         Random random = new Random();
-        double pick = sum*random.nextDouble();
-        if(pick<allModels.get("OPENAI")){
-            selectModel=OPENAI;
-        }else selectModel=COHERE;
+        double pick = sum * random.nextDouble();
+
+        // TODO
+        if (pick < allModels.get("OPENAI")) {
+            selectModel = OPENAI;
+        } else {
+            selectModel = COHERE;
+        }
         String response = handler.sendMessage(selectModel, message);
         return response;
     }
