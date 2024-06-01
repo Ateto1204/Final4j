@@ -46,16 +46,16 @@ public class UserService implements UserUseCase {
 
         LanguageModelType selectModel;
         Map<String,Double>allModels = repository.getUser().getModels();
-        double sum = allModels.get("OPENAI") + allModels.get("COHERE");
+        double sum = allModels.get("OPENAI") + allModels.get("COHERE") + allModels.get("GEMINI");
         Random random = new Random();
         double pick = sum * random.nextDouble();
-
-        // TODO
+        
         if (pick < allModels.get("OPENAI")) {
             selectModel = OPENAI;
-        } else {
+        } else if(pick < allModels.get("OPENAI") + allModels.get("COHERE")){
             selectModel = COHERE;
-        }
+        }else selectModel = GEMINI;
+
         String response = handler.sendMessage(selectModel, message);
         return response;
     }
