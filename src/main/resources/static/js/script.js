@@ -1,17 +1,21 @@
-let msgCount = 0;
-let userName, userEmail;
+const port = window.location.port;
+let msgNumber = 0;
+let userName, userEmail, userPassword, enter;
 
 function start(){
-    msgCount = 1;
+    msgNumber = 1;
     userName = localStorage.getItem("name");
     userEmail = localStorage.getItem("email");
+    enter = localStorage.getItem("enter");
     console.log(userName);
     console.log(userEmail);
+    console.log(enter);
 
-    if(userEmail == null)
-        window.location.href = "http://localhost:8080/login";
-    else
-        document.getElementById("userName").innerHTML = userName;
+    if(enter == null)
+        window.location.href = "http://localhost:" +　port + "/login";
+
+    document.getElementById("userName").innerHTML = userName;
+    localStorage.removeItem("enter");
 
     // document.getElementById("clickBtn").addEventListener("click", move_leftPage, false);
     document.getElementById("logoutBtn").addEventListener("click", logout, false);
@@ -53,7 +57,7 @@ function start(){
 
 function logout(){
     localStorage.clear();
-    window.location.href = "http://localhost:8080/login";
+    window.location.href = "http://localhost:" + port + "/login";
 }
 
 window.addEventListener("load", start, false);

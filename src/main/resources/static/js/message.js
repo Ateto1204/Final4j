@@ -19,7 +19,7 @@ function addBotMessage(message){
     if(isMessage(message)){
         addMessage(toMessage(message), "bot");
         addLikeIcon();
-        msgCount++;
+        msgNumber++;
     }
 }
 
@@ -56,7 +56,7 @@ function addMessage(message, sender){
     const messageElement = document.createElement("div");
     messageElement.classList.add(sender);
     if(sender == "bot")
-        messageElement.setAttribute("id", "msg"+msgCount);
+        messageElement.setAttribute("id", "msg"+msgNumber);
     messageElement.innerHTML = message;
     chatBox.appendChild(messageElement);
 }
@@ -71,4 +71,23 @@ async function sendMessageToLM(message) {
     }catch(err){
         console.log("Failed: " + err);
     }
+
+    // let url = "http://localhost:" + port + "/api/user/send";
+    // let body = {
+    //     "email": userEmail,
+    //     "password": userPassword,
+    //     "message": message
+    // }
+    //
+    // try{
+    //     const response = await fetch(url, {
+    //         method: "GET",
+    //         body: JSON.stringify(body)});
+    //     const data = await response.json();
+    //     console.log(data.response);
+    //     addBotMessage(data.response);
+    // }catch(err){
+    //     console.log("Failed: " + err);
+    // }
 }
+

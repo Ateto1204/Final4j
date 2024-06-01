@@ -1,4 +1,6 @@
+const port = window.location.port;
 let myName;
+
 function start(){
     localStorage.clear();
     showLogin();
@@ -23,7 +25,7 @@ function showRegister(){
 }
 
 async function findUserByEmail(email){
-    let url = "http://localhost:8080/api/user/" + email;
+    let url = "http://localhost:" + port + "/api/user/" + email;
     let isSuccess = false;
 
     try{
@@ -40,14 +42,15 @@ async function findUserByEmail(email){
     return isSuccess;
 }
 
-async function saveUser(name, email) {
-    let url = "http://localhost:8080/api/user";
+async function saveUser(name, email, password) {
+    let url = "http://localhost:" + port + "/api/user";
     let headers = {
         'Content-Type': 'application/json'
     }
     let body = {
         "email": email,
         "name": name,
+        // "password": password,
         "sentMsg": [],
         "responsedMsg": [],
         "models": {
@@ -84,7 +87,9 @@ async function userLogin(event) {
         alert("Login successfully");
         localStorage.setItem('name', myName);
         localStorage.setItem('email', email);
-        window.location.href = "http://localhost:8080/chatBot";
+        localStorage.setItem('password', password);
+        localStorage.setItem('enter', 'true');
+        window.location.href = "http://localhost:" + port + "/chatBot";
     }
     else{
         alert("Login Failed");
@@ -107,12 +112,13 @@ async function userRegister(event) {
         return;
     }
 
-    if(await saveUser(name, email) == true){
-        alert("Login successfully");
+    if(await saveUser(name, email, password) == true){
+        alert("Register successfully");
         localStorage.setItem('name', myName);
         localStorage.setItem('email', email);
-        localStorage.setItem('userEmail', email);
-        window.location.href = "http://localhost:8080/chatBot";
+        localStorage.setItem('password', password);
+        localStorage.setItem('enter', 'true');
+        window.location.href = "http://localhost:" + port + "/chatBot";
     }
 }
 
