@@ -26,7 +26,8 @@ public class UserService implements UserUseCase {
     @Override
     public User getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException {
         if (!checkPwd(user.getEmail(), user.getPwd())) {
-            return null;
+            User error = new User();
+            return error;
         }
         return repository.getUserByEmail(user.getEmail());
     }
@@ -64,7 +65,8 @@ public class UserService implements UserUseCase {
     @Override
     public LMMessage sendMessage(UserMessage prompt) throws ExecutionException, InterruptedException {
         if (!checkPwd(prompt.getEmail(), prompt.getPassword())) {
-            return null;
+            LMMessage error = new LMMessage();
+            return error;
         }
         repository.sendMessage(prompt.getEmail(), prompt.getMessage());
 
@@ -94,8 +96,17 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public boolean checkPwd(String email, String pwd) throws ExecutionException, InterruptedException {
+    public Boolean checkPwd(String email, String pwd) throws ExecutionException, InterruptedException {
         User user = repository.getUserByEmail(email);
         return user.checkPwd(pwd);
+    }
+
+    @Override
+    public Boolean isUserExisted(String email) throws ExecutionException, InterruptedException {
+        User user = repository.getUserByEmail(email);
+        if (user != null) {
+            return true;
+        }
+        return false;
     }
 }

@@ -10,5 +10,6 @@ public interface UserUseCase {
     User getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException;
     String notifyModel(UserModifyWeight myModify) throws ExecutionException, InterruptedException;
     LMMessage sendMessage(UserMessage userMessage) throws ExecutionException, InterruptedException;
-    boolean checkPwd(String email, String pwd) throws ExecutionException, InterruptedException;
+    Boolean checkPwd(String email, String pwd) throws ExecutionException, InterruptedException;
+    Boolean isUserExisted(String email) throws ExecutionException, InterruptedException;
 }

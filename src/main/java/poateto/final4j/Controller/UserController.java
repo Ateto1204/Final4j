@@ -28,7 +28,7 @@ public class UserController {
 //        return service.getUserByEmail(email);
 //    }
 
-    @PostMapping("/check")
+    @PostMapping("/check") // request body: email, pwd
     public User getUserByEmail(@RequestBody UserLogin user) throws ExecutionException, InterruptedException {
         return service.getUserByEmail(user);
     }
@@ -42,5 +42,10 @@ public class UserController {
     @PostMapping("/modify") // request body: email, pwd, model, status
     public String modifyWeight(@RequestBody UserModifyWeight modify) throws ExecutionException, InterruptedException {
         return service.notifyModel(modify);
+    }
+
+    @GetMapping("/find")
+    public Boolean isUserExisted(@RequestParam String mail) throws ExecutionException, InterruptedException {
+        return service.isUserExisted(mail);
     }
 }
