@@ -1,27 +1,49 @@
 function addLikeIcon(model) {
-    const chatBox = document.getElementById("chatBox");
     const messageElement = document.createElement("div");
     messageElement.classList.add("like-option");
-    messageElement.innerHTML = "<div class=\"iconDiv like\" id=\"like"+msgNumber+"\" onclick=\"increaseWeight(\'"+model+"\',"+msgNumber+")\">\n" +
-        "                        <img src=\"/img/like.png\" class=\"icon\" alt=\"Like Icon\"/>\n" +
-        "                    </div>\n" +
-        "                    <div class=\"iconDiv dislike\" id=\"dislike"+msgNumber+"\" onclick=\"decreaseWeight(\'"+model+"\',"+msgNumber+")\">\n" +
-        "                        <img src=\"/img/dislike.png\" class=\"icon\" alt=\"Dislike Icon\"/>\n" +
-        "                    </div>";
-    chatBox.appendChild(messageElement);
+    messageElement.innerHTML = `<div class="iconDiv like" id="like${msgNumber}" onclick="increaseWeight('${model}',${msgNumber})">\n` +
+        `                        <img src="/img/like.png\" class=\"icon\" alt=\"Like Icon\"/>\n` +
+        `                    </div>\n` +
+        `                    <div class="iconDiv dislike" id="dislike${msgNumber}" onclick="decreaseWeight('${model}',${msgNumber})">\n` +
+        `                        <img src="/img/dislike.png" class="icon" alt="Dislike Icon"/>\n` +
+        `                    </div>`;
+    return messageElement;
+}
+
+function addModelLogo(model) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("modelDiv");
+    messageElement.innerHTML = `<img src="/img/${model}.png" class="model" alt="${model} logo"/>`;
+    return messageElement;
 }
 
 function increaseWeight(model, id) {
-    document.getElementById("like"+id).classList.add('active');
-    document.getElementById("dislike"+id).classList.remove('active');
+    const like = document.getElementById("like"+id);
+    const dislike = document.getElementById("dislike"+id);
+
+    if(like.classList.contains("active"))
+        return;
+    if(dislike.classList.contains("active"))
+        modifyWeight(model, "INCREASE");
+
+    like.classList.add('active');
+    dislike.classList.remove('active');
     console.log("like" + id);
     console.log(model);
     modifyWeight(model, "INCREASE");
 }
 
 function decreaseWeight(model, id) {
-    document.getElementById("like"+id).classList.remove('active');
-    document.getElementById("dislike"+id).classList.add('active');
+    const like = document.getElementById("like"+id);
+    const dislike = document.getElementById("dislike"+id);
+
+    if(dislike.classList.contains("active"))
+        return;
+    if(like.classList.contains("active"))
+        modifyWeight(model, "DECREASE");
+
+    like.classList.remove('active');
+    dislike.classList.add('active');
     console.log("dislike" + id);
     console.log(model);
     modifyWeight(model, "DECREASE");

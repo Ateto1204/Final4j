@@ -9,18 +9,31 @@ function getInputMessage(){
 }
 
 function addUserMessage(message){
-    if(isMessage(message)){
-        addMessage(toMessage(message), "user");
-        sendMessageToLM(message);
-    }
+    if(!isMessage(message)) return;
+
+    const chatBox = document.getElementById("chatBox");
+    const msg = addMessage(toMessage(message), "user");
+    chatBox.appendChild(msg);
+
+    sendMessageToLM(message);
 }
 
 function addBotMessage(model, message){
-    if(isMessage(message)){
-        addMessage(toMessage(message), "bot");
-        addLikeIcon(model);
-        msgNumber++;
-    }
+    if(!isMessage(message)) return;
+
+    const chatBox = document.getElementById("chatBox");
+    const modelLogo = addModelLogo(model);
+    const msg = addMessage(toMessage(message), "bot");
+    const icon = addLikeIcon(model);
+
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("botDiv");
+    messageElement.appendChild(modelLogo);
+    messageElement.appendChild(msg);
+
+    chatBox.appendChild(messageElement);
+    chatBox.appendChild(icon);
+    msgNumber++;
 }
 
 function isMessage(message){
@@ -52,26 +65,13 @@ function toMessage(message) {
 }
 
 function addMessage(message, sender){
-    const chatBox = document.getElementById("chatBox");
     const messageElement = document.createElement("div");
     messageElement.classList.add(sender);
-    if(sender == "bot")
-        messageElement.setAttribute("id", "msg"+msgNumber);
     messageElement.innerHTML = message;
-    chatBox.appendChild(messageElement);
+    return messageElement;
 }
 
 async function sendMessageToLM(message) {
-    // let url = "http://localhost:8080/api/user/send/" + userEmail + "?msg=" + message;
-    // try{
-    //     const response = await fetch(url, {method: "GET"});
-    //     const responseMsg = await response.text();
-    //     console.log(responseMsg);
-    //     addBotMessage(responseMsg);
-    // }catch(err){
-    //     console.log("Failed: " + err);
-    // }
-
     let url = "http://localhost:" + port + "/api/user/send";
     let headers = {
         'Content-Type': 'application/json'

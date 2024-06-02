@@ -1,0 +1,14 @@
+.botDiv {
+    display: flex;
+}
+
+.modelDiv {
+    margin: 2px;
+    object-fit: contain;
+    text-align: center;
+}
+
+.model {
+    width: 30px;
+    height: 30px;
+}
