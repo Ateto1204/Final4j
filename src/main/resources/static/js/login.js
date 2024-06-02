@@ -50,14 +50,14 @@ async function saveUser(name, email, password) {
     let body = {
         "email": email,
         "name": name,
-        // "password": password,
-        "sentMsg": [],
-        "responsedMsg": [],
-        "models": {
-            "gemini": 1.0,
-            "llama": 1.0,
-            "gpt4": 1.0
-        }
+        "password": password
+        // "sentMsg": [],
+        // "responsedMsg": [],
+        // "models": {
+        //     "gemini": 1.0,
+        //     "llama": 1.0,
+        //     "gpt4": 1.0
+        // }
     }
 
     let isSuccess = false;

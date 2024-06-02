@@ -15,10 +15,10 @@ function addUserMessage(message){
     }
 }
 
-function addBotMessage(message){
+function addBotMessage(model, message){
     if(isMessage(message)){
         addMessage(toMessage(message), "bot");
-        addLikeIcon();
+        addLikeIcon(model);
         msgNumber++;
     }
 }
@@ -62,32 +62,36 @@ function addMessage(message, sender){
 }
 
 async function sendMessageToLM(message) {
-    let url = "http://localhost:8080/api/user/send/" + userEmail + "?msg=" + message;
-    try{
-        const response = await fetch(url, {method: "GET"});
-        const responseMsg = await response.text();
-        console.log(responseMsg);
-        addBotMessage(responseMsg);
-    }catch(err){
-        console.log("Failed: " + err);
-    }
-
-    // let url = "http://localhost:" + port + "/api/user/send";
-    // let body = {
-    //     "email": userEmail,
-    //     "password": userPassword,
-    //     "message": message
-    // }
-    //
+    // let url = "http://localhost:8080/api/user/send/" + userEmail + "?msg=" + message;
     // try{
-    //     const response = await fetch(url, {
-    //         method: "GET",
-    //         body: JSON.stringify(body)});
-    //     const data = await response.json();
-    //     console.log(data.response);
-    //     addBotMessage(data.response);
+    //     const response = await fetch(url, {method: "GET"});
+    //     const responseMsg = await response.text();
+    //     console.log(responseMsg);
+    //     addBotMessage(responseMsg);
     // }catch(err){
     //     console.log("Failed: " + err);
     // }
+
+    let url = "http://localhost:" + port + "/api/user/send";
+    let headers = {
+        'Content-Type': 'application/json'
+    }
+    let body = {
+        "email": userEmail,
+        "password": userPassword,
+        "message": message
+    }
+    console.log("json: " + JSON.stringify(body));
+
+    try{
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body)});
+        const data = await response.json();
+        addBotMessage(data.model, data.message);
+    }catch(err){
+        console.log("Failed: " + err);
+    }
 }
 

@@ -6,10 +6,11 @@ function start(){
     msgNumber = 1;
     userName = localStorage.getItem("name");
     userEmail = localStorage.getItem("email");
+    userPassword = localStorage.getItem("password");
     enter = localStorage.getItem("enter");
-    console.log(userName);
-    console.log(userEmail);
-    console.log(enter);
+    console.log("name: " + userName);
+    console.log("email: " + userEmail);
+    console.log("password: " + userPassword);
 
     if(enter == null)
         window.location.href = "http://localhost:" +　port + "/login";
