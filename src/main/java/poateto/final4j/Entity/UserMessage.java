@@ -1,20 +1,11 @@
 package poateto.final4j.Entity;
 
-public class UserMessage {
-    private String email;
-    private String password;
+public class UserMessage extends UserOOP{
     private String message;
 
-    public UserMessage() {
-
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
+    public UserMessage(String email, String pwd, String message) {
+        super(email, pwd);
+        this.message = message;
     }
 
     public String getMessage() {

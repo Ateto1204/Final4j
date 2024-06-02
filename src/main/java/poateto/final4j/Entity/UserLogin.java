@@ -1,18 +1,8 @@
 package poateto.final4j.Entity;
 
-public class UserLogin {
-    private String email;
-    private String pwd;
+public class UserLogin extends UserOOP{
 
-    public UserLogin() {
-
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPwd() {
-        return pwd;
+    public UserLogin(String email, String pwd) {
+        super(email,pwd);
     }
 }
