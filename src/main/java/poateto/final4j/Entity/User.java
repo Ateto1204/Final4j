@@ -1,8 +1,13 @@
 package poateto.final4j.Entity;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static poateto.final4j.UseCases.Components.LanguageModelType.*;
 
 public class User {
     private String email;
@@ -11,9 +16,22 @@ public class User {
     private List<String> sentMsg;
     private List<String> responsedMsg;
     private Map<String, Double> models;
+
     public User() {
         sentMsg = new ArrayList<>();
         responsedMsg = new ArrayList<>();
+
+        models = new HashMap<>();
+        models.put(OPENAI.name(), 1.0);
+        models.put(COHERE.name(), 1.0);
+        models.put(GEMINI.name(), 1.0);
+    }
+
+    public User(UserCreate user) {
+        this();
+        this.email = user.getEmail();
+        this.name = user.getName();
+        this.pwd = user.getPassword();
     }
 
     public String getName() {
@@ -44,8 +62,12 @@ public class User {
         return sentMsg;
     }
 
-    public boolean checkPwd(String pwd) {
-        return this.pwd.equals(pwd);
+    public String getPwd() {
+        return pwd;
+    }
+
+    public boolean checkPwd(String password) {
+        return pwd.equals(password);
     }
 
     public void responsedMsg(String msg) {

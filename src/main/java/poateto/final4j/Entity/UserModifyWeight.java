@@ -9,9 +9,7 @@ public class UserModifyWeight {
     private String model;
     private NotifyStatus status;
 
-    public UserModifyWeight() {}
-
-    public UserModifyWeight(String email, String password, String model, NotifyStatus status) {
+    public UserModifyWeight() {
 
     }
 
