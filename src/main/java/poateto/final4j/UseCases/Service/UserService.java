@@ -25,7 +25,7 @@ public class UserService implements UserUseCase {
 
     @Override
     public User getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException {
-        if (!checkPwd(user.getEmail(), user.getPwd())) {
+        if (!checkPwd(user.getEmail(), user.getPassword())) {
             User error = new User();
             return error;
         }
