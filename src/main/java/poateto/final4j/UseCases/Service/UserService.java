@@ -24,9 +24,16 @@ public class UserService implements UserUseCase {
     }
 
     @Override
-    public User getUserByEmail(String email) throws ExecutionException, InterruptedException {
-        return repository.getUserByEmail(email);
+    public User getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException {
+        if (!checkPwd(user.getEmail(), user.getPwd())) {
+            return null;
+        }
+        return repository.getUserByEmail(user.getEmail());
     }
+
+//    public User getUserByEmail(String email) throws ExecutionException, InterruptedException {
+//        return repository.getUserByEmail(email);
+//    }
 
     @Override
     public String notifyModel(UserModifyWeight myModify) throws ExecutionException, InterruptedException {
@@ -37,32 +44,22 @@ public class UserService implements UserUseCase {
             return repository.notifyModel(myModify.getEmail(), myModify.getModel(), 0.3);
         }
         if (myModify.getStatus() == DECREASE) {
+            if (repository.getUserByEmail(myModify.getEmail()).getModels().get(myModify.getModel()) <= 0) {
+                return offsetModels(myModify);
+            }
             return repository.notifyModel(myModify.getEmail(), myModify.getModel(), -1);
         }
-        return repository.notifyModel(myModify.getEmail(), myModify.getModel(), 0);
+        return null;
     }
 
-//    @Override
-//    public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
-//        repository.sendMessage(email, message);
-//
-//        LanguageModelType selectModel;
-//        Map<String,Double>allModels = repository.getUser().getModels();
-//        double sum = allModels.get("OPENAI") + allModels.get("COHERE") + allModels.get("GEMINI");
-//        Random random = new Random();
-//        double pick = sum * random.nextDouble();
-//
-//        if (pick < allModels.get("OPENAI")) {
-//            selectModel = OPENAI;
-//        } else if (pick < allModels.get("OPENAI") + allModels.get("COHERE")) {
-//            selectModel = COHERE;
-//        } else {
-//            selectModel = GEMINI;
-//        }
-//
-//        String response = handler.sendMessage(selectModel, message);
-//        return response;
-//    }
+    public String offsetModels(UserModifyWeight modify) throws ExecutionException, InterruptedException {
+        Map<String, Double> models = repository.getUserByEmail(modify.getEmail()).getModels();
+        String msg = null;
+        for (String model : models.keySet()) {
+            msg = repository.notifyModel(modify.getEmail(), model, 1.0);
+        }
+        return msg;
+    }
 
     @Override
     public LMMessage sendMessage(UserMessage prompt) throws ExecutionException, InterruptedException {

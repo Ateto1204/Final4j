@@ -23,9 +23,14 @@ public class UserController {
         return service.saveUser(user);
     }
 
-    @GetMapping("/{email}")
-    public User getUserByEmail(@PathVariable String email) throws ExecutionException, InterruptedException {
-        return service.getUserByEmail(email);
+//    @PostMapping("/{email}")
+//    public User getUserByEmail(@PathVariable String email) throws ExecutionException, InterruptedException {
+//        return service.getUserByEmail(email);
+//    }
+
+    @PostMapping("/check")
+    public User getUserByEmail(@RequestBody UserLogin user) throws ExecutionException, InterruptedException {
+        return service.getUserByEmail(user);
     }
 
     // request body: email, pwd, prompt; return: response, model
