@@ -1,5 +1,5 @@
 const port = window.location.port;
-let myName;
+let myName, myEmail, myPassword;
 
 function start(){
     localStorage.clear();
@@ -24,22 +24,59 @@ function showRegister(){
     document.getElementById('register-toggle').classList.add('active');
 }
 
-async function findUserByEmail(email){
-    let url = "http://localhost:" + port + "/api/user/" + email;
-    let isSuccess = false;
+async function isUserExisted(email) {
+    let url = "http://localhost:" + port + "/api/user/find?mail=" + email;
 
-    try{
+    try {
         const response = await fetch(url);
-        const data = await response.json();
+        const data = await response.text();
         console.log(data);
-        myName = data.name;
-        isSuccess = true;
-    }catch(err){
+
+        if(data == "true")
+            return true;
+        else
+            return false;
+    } catch (err) {
         console.log("Failed: " + err);
-        isSuccess = false;
+        return false;
     }
 
-    return isSuccess;
+    return false;
+}
+
+async function findUserByEmail(email, password){
+    let url = "http://localhost:" + port + "/api/user/check";
+    let headers = {
+        'Content-Type': 'application/json'
+    }
+    let body = {
+        "email": email,
+        "pwd": password
+    }
+
+    try{
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        console.log(data);
+
+        myName = data.name;
+        myEmail = data.email;
+        myPassword = data.pwd;
+
+        if(myName == null || myEmail == null || myPassword == null)
+            return false;
+        else
+            return true;
+    }catch(err){
+        console.log("Failed: " + err);
+        return false;
+    }
+
+    return false;
 }
 
 async function saveUser(name, email, password) {
@@ -51,31 +88,30 @@ async function saveUser(name, email, password) {
         "email": email,
         "name": name,
         "password": password
-        // "sentMsg": [],
-        // "responsedMsg": [],
-        // "models": {
-        //     "gemini": 1.0,
-        //     "llama": 1.0,
-        //     "gpt4": 1.0
-        // }
     }
 
-    let isSuccess = false;
     try{
         const response = await fetch(url, {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)});
         const data = await response.json();
-        myName = data.name;
         console.log(data);
-        isSuccess = true;
+
+        myName = data.name;
+        myEmail = data.email;
+        myPassword = data.pwd;
+
+        if(myName == null || myEmail == null || myPassword == null)
+            return false;
+        else
+            return true;
     }catch(err){
-        console.log(err);
-        isSuccess = false;
+        console.log("Failed: " + err);
+        return false;
     }
 
-    return isSuccess;
+    return false;
 }
 
 async function userLogin(event) {
@@ -83,7 +119,7 @@ async function userLogin(event) {
     let email = document.getElementById('login-email').value;
     let password = document.getElementById('login-password').value;
 
-    if(await findUserByEmail(email) == true){
+    if(await isUserExisted(email) && await findUserByEmail(email, password)){
         alert("Login successfully");
         localStorage.setItem('name', myName);
         localStorage.setItem('email', email);
@@ -104,7 +140,7 @@ async function userRegister(event) {
     let email = document.getElementById('register-email').value;
     let password = document.getElementById('register-password').value;
 
-    if(await findUserByEmail(email) == true){
+    if(await isUserExisted(email) == true){
         alert("Email already exists");
         document.getElementById('register-username').value = "";
         document.getElementById('register-email').value = "";
