@@ -13,20 +13,20 @@ import poateto.final4j.UseCases.Components.ApiKeySet;
 public class Final4jApplication {
 
 	public static void main(String[] args) {
-//		System.setProperty("java.awt.headless", "false");
+		System.setProperty("java.awt.headless", "false");
 		ApiKeySet.init();
 		SpringApplication.run(Final4jApplication.class, args);
 	}
 
-//	@EventListener(ApplicationReadyEvent.class)
-//	public void openLoginPage() {
-//		System.out.println("Welcome to the Login Page");
-//		try {
-//			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-//				Desktop.getDesktop().browse(new URI("http://localhost:8080/login"));
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	@EventListener(ApplicationReadyEvent.class)
+	public void openLoginPage() {
+		System.out.println("Welcome to the Login Page");
+		try {
+			if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+				Desktop.getDesktop().browse(new URI("http://localhost:8080/login"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
