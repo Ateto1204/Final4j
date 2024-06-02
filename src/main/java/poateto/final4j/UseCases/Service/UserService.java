@@ -44,27 +44,43 @@ public class UserService implements UserUseCase {
         return repository.notifyModel(myModify.getEmail(), myModify.getModel(), 0);
     }
 
-//    @Override
-//    public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
-//        repository.sendMessage(email, message);
-//
-//        LanguageModelType selectModel;
-//        Map<String,Double>allModels = repository.getUser().getModels();
-//        double sum = allModels.get("OPENAI") + allModels.get("COHERE") + allModels.get("GEMINI");
-//        Random random = new Random();
-//        double pick = sum * random.nextDouble();
-//
-//        if (pick < allModels.get("OPENAI")) {
-//            selectModel = OPENAI;
-//        } else if (pick < allModels.get("OPENAI") + allModels.get("COHERE")) {
-//            selectModel = COHERE;
-//        } else {
-//            selectModel = GEMINI;
-//        }
-//
-//        String response = handler.sendMessage(selectModel, message);
-//        return response;
-//    }
+    @Override
+    public String sendMessage(String email, String message) throws ExecutionException, InterruptedException {
+        repository.sendMessage(email, message);
+
+        LanguageModelType selectModel;
+        Map<String,Double>allModels = repository.getUser().getModels();
+        double weightOfOpenai = allModels.get("OPENAI");
+        double weightOfCohere = allModels.get("COHERE");
+        double weightOfGemini = allModels.get("GEMINI");
+        double mn=999;
+
+        if(weightOfGemini < mn) mn = weightOfGemini;
+        if(weightOfCohere < mn) mn = weightOfCohere;
+        if(weightOfOpenai < mn) mn = weightOfOpenai;
+
+        if(mn<0.0){
+            mn =- mn;
+            weightOfGemini += mn;
+            weightOfOpenai += mn;
+            weightOfCohere += mn;
+            repository.notifyModel(email,"OPENAI",mn);
+            repository.notifyModel(email,"COHERE",mn);
+            repository.notifyModel(email,"GEMINI",mn);
+        }
+
+        double sum = weightOfOpenai + weightOfCohere + weightOfGemini;
+        Random random = new Random();
+        double pick = sum * random.nextDouble();
+        if (pick < weightOfOpenai) {
+            selectModel = OPENAI;
+        } else if(pick < weightOfOpenai + weightOfCohere){
+            selectModel = COHERE;
+        }else selectModel = GEMINI;
+
+        String response = handler.sendMessage(selectModel, message);
+        return response;
+    }
 
     @Override
     public LMMessage sendMessage(UserMessage prompt) throws ExecutionException, InterruptedException {
