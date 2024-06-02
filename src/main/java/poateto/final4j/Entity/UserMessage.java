@@ -5,7 +5,19 @@ public class UserMessage {
     private String password;
     private String message;
 
-    public UserMessage(String email, String password, String message) {
+    public UserMessage() {
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
