@@ -56,7 +56,7 @@ async function modifyWeight(model, status) {
     }
     let body = {
         "email": userEmail,
-        "password": userPassword,
+        "pwd": userPassword,
         "model": model,
         "status": status
     }

@@ -1,26 +1,25 @@
 function getInputMessage(){
     const text = document.getElementById("inputText");
     if(isMessage(text.value)){
-        addUserMessage(text.value);
+        userSendMessage(text.value);
         setTimeout(() => {
             text.value = "";
         }, 1);
     }
 }
 
-function addUserMessage(message){
-    if(!isMessage(message)) return;
-
-    const chatBox = document.getElementById("chatBox");
-    const msg = addMessage(toMessage(message), "user");
-    chatBox.appendChild(msg);
-
+function userSendMessage(message) {
+    addUserMessage(message);
     sendMessageToLM(message);
 }
 
-function addBotMessage(model, message){
-    if(!isMessage(message)) return;
+function addUserMessage(message){
+    const chatBox = document.getElementById("chatBox");
+    const msg = addMessage(toMessage(message), "user");
+    chatBox.appendChild(msg);
+}
 
+function addBotMessage(model, message){
     const chatBox = document.getElementById("chatBox");
     const modelLogo = addModelLogo(model);
     const msg = addMessage(toMessage(message), "bot");
@@ -78,10 +77,9 @@ async function sendMessageToLM(message) {
     }
     let body = {
         "email": userEmail,
-        "password": userPassword,
+        "pwd": userPassword,
         "message": message
     }
-    console.log("json: " + JSON.stringify(body));
 
     try{
         const response = await fetch(url, {
@@ -95,3 +93,11 @@ async function sendMessageToLM(message) {
     }
 }
 
+function getHistoryMessage(userMessage, botMessage, model) {
+    let len = userMessage.length;
+
+    for(let i = 0; i < len; i++){
+        addUserMessage(userMessage[i]);
+        addBotMessage(model, botMessage[i]);
+    }
+}
