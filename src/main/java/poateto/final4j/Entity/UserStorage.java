@@ -9,15 +9,23 @@ import java.util.Map;
 
 import static poateto.final4j.UseCases.Components.LanguageModelType.*;
 
-public class User {
-    private String email;
+public class UserStorage extends UserEntity {
     private String name;
-    private String pwd;
     private List<String> sentMsg;
     private List<String> responsedMsg;
     private Map<String, Double> models;
 
-    public User() {
+    public UserStorage() {
+        super();
+        init();
+    }
+    public UserStorage(UserCreate user) {
+        super(user.getEmail(), user.getPwd());
+        this.name = user.getName();
+        init();
+    }
+
+    private void init() {
         sentMsg = new ArrayList<>();
         responsedMsg = new ArrayList<>();
 
@@ -27,27 +35,21 @@ public class User {
         models.put(GEMINI.name(), 1.0);
     }
 
-    public User(UserCreate user) {
-        this();
-        this.email = user.getEmail();
-        this.name = user.getName();
-        this.pwd = user.getPassword();
-    }
-
     public String getName() {
         return name;
     }
-
+    public List<String> getSentMsg() {
+        return sentMsg;
+    }
+    public List<String> getResponsedMsg() {
+        return responsedMsg;
+    }
     public Map<String, Double> getModels() {
         return models;
     }
-    public String getEmail() {
-        return email;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
+    public void setName(String name) { this.name = name; }
 
     public void notifyModel(String model, double value) {
         double origin = models.get(model);
@@ -58,22 +60,8 @@ public class User {
     public void sentMsg(String msg) {
         sentMsg.add(msg);
     }
-    public List<String> getSentMsg() {
-        return sentMsg;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public boolean checkPwd(String password) {
-        return pwd.equals(password);
-    }
-
     public void responsedMsg(String msg) {
         responsedMsg.add(msg);
     }
-    public List<String> getResponsedMsg() {
-        return responsedMsg;
-    }
+    public boolean checkPwd(String pwd) { return getPwd().equals(pwd); }
 }
