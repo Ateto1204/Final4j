@@ -1,6 +1,7 @@
 const port = window.location.port;
 let msgNumber = 0;
 let userName, userEmail, userPassword, enter;
+let sentMsg, responsedMsg;
 
 function start(){
     msgNumber = 1;
@@ -19,6 +20,7 @@ function start(){
     localStorage.removeItem("enter");
 
     // document.getElementById("clickBtn").addEventListener("click", move_leftPage, false);
+    loadHistoryMessage();
     document.getElementById("logoutBtn").addEventListener("click", logout, false);
     document.getElementById("inputBtn").addEventListener("click", getInputMessage, false);
     document.getElementById("inputText").addEventListener("keydown", function(event){
@@ -59,6 +61,33 @@ function start(){
 function logout(){
     localStorage.clear();
     window.location.href = "http://localhost:" + port + "/login";
+}
+
+async function loadHistoryMessage() {
+    let url = "http://localhost:" + port + "/api/user/check";
+    let headers = {
+        'Content-Type': 'application/json'
+    }
+    let body = {
+        "email": userEmail,
+        "pwd": userPassword
+    }
+
+    try{
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+
+        sentMsg = data.sentMsg;
+        responsedMsg = data.responsedMsg;
+    }catch(err){
+        console.log("Failed: " + err);
+    }
+
+    getHistoryMessage(sentMsg, responsedMsg);
 }
 
 window.addEventListener("load", start, false);

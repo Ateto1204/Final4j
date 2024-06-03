@@ -87,7 +87,7 @@ async function saveUser(name, email, password) {
     let body = {
         "email": email,
         "name": name,
-        "password": password
+        "pwd": password
     }
 
     try{
