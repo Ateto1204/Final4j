@@ -12,7 +12,7 @@ import static poateto.final4j.UseCases.Components.LanguageModelType.*;
 public class UserStorage extends UserEntity {
     private String name;
     private List<String> sentMsg;
-    private List<String> responsedMsg;
+    private List<LMMessage> responsedMsg;
     private Map<String, Double> models;
 
     public UserStorage() {
@@ -41,15 +41,12 @@ public class UserStorage extends UserEntity {
     public List<String> getSentMsg() {
         return sentMsg;
     }
-    public List<String> getResponsedMsg() {
+    public List<LMMessage> getResponsedMsg() {
         return responsedMsg;
     }
     public Map<String, Double> getModels() {
         return models;
     }
-
-
-    public void setName(String name) { this.name = name; }
 
     public void notifyModel(String model, double value) {
         double origin = models.get(model);
@@ -60,7 +57,7 @@ public class UserStorage extends UserEntity {
     public void sentMsg(String msg) {
         sentMsg.add(msg);
     }
-    public void responsedMsg(String msg) {
+    public void responsedMsg(LMMessage msg) {
         responsedMsg.add(msg);
     }
     public boolean checkPwd(String pwd) { return getPwd().equals(pwd); }
