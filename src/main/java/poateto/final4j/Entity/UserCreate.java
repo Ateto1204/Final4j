@@ -1,19 +1,7 @@
 package poateto.final4j.Entity;
 
-public class UserCreate {
-    private String email;
+public class UserCreate extends UserEntity {
     private String name;
-    private String password;
-
-    public UserCreate() {
-
-    }
-
-    public String getEmail() {
-        return email;
-    }
+    public UserCreate() { super(); }
     public String getName() { return name; }
-    public String getPassword() {
-        return password;
-    }
 }

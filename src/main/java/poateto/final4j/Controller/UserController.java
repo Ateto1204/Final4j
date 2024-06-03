@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping // request body: email, name, pwd
-    public User saveUser(@RequestBody UserCreate user) throws ExecutionException, InterruptedException {
+    public UserStorage saveUser(@RequestBody UserCreate user) throws ExecutionException, InterruptedException {
         return service.saveUser(user);
     }
 
@@ -29,7 +29,7 @@ public class UserController {
 //    }
 
     @PostMapping("/check") // request body: email, pwd
-    public User getUserByEmail(@RequestBody UserLogin user) throws ExecutionException, InterruptedException {
+    public UserStorage getUserByEmail(@RequestBody UserLogin user) throws ExecutionException, InterruptedException {
         return service.getUserByEmail(user);
     }
 

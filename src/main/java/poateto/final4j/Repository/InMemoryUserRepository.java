@@ -1,22 +1,23 @@
 package poateto.final4j.Repository;
 
 import poateto.final4j.DB.UserDatabase;
-import poateto.final4j.Entity.User;
+import poateto.final4j.Entity.UserStorage;
+import poateto.final4j.Entity.UserStorage;
 
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class InMemoryUserRepository implements UserRepository {
-    private User user;
+    private UserStorage user;
     private UserDatabase db = new UserDatabase();
 
     @Override
-    public User saveUser(User user) throws ExecutionException, InterruptedException {
+    public UserStorage saveUser(UserStorage user) throws ExecutionException, InterruptedException {
         String msg = db.saveUser(user);
         return getUserByEmail(user.getEmail());
     }
     @Override
-    public User getUserByEmail(String email) throws ExecutionException, InterruptedException {
+    public UserStorage getUserByEmail(String email) throws ExecutionException, InterruptedException {
         user = db.getUserByEmail(email);
         return user;
     }

@@ -18,15 +18,15 @@ public class UserService implements UserUseCase {
     private LanguageModelHandler handler = new LanguageModelHandler();
 
     @Override
-    public User saveUser(UserCreate user) throws ExecutionException, InterruptedException {
-        User myUser = new User(user);
+    public UserStorage saveUser(UserCreate user) throws ExecutionException, InterruptedException {
+        UserStorage myUser = new UserStorage(user);
         return repository.saveUser(myUser);
     }
 
     @Override
-    public User getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException {
+    public UserStorage getUserByEmail(UserLogin user) throws ExecutionException, InterruptedException {
         if (!checkPwd(user.getEmail(), user.getPwd())) {
-            User error = new User();
+            UserStorage error = new UserStorage();
             return error;
         }
         return repository.getUserByEmail(user.getEmail());
@@ -38,7 +38,7 @@ public class UserService implements UserUseCase {
 
     @Override
     public String notifyModel(UserModifyWeight myModify) throws ExecutionException, InterruptedException {
-        if (!checkPwd(myModify.getEmail(), myModify.getPassword())) {
+        if (!checkPwd(myModify.getEmail(), myModify.getPwd())) {
             return null;
         }
         if (myModify.getStatus() == INCREASE) {
@@ -64,7 +64,7 @@ public class UserService implements UserUseCase {
 
     @Override
     public LMMessage sendMessage(UserMessage prompt) throws ExecutionException, InterruptedException {
-        if (!checkPwd(prompt.getEmail(), prompt.getPassword())) {
+        if (!checkPwd(prompt.getEmail(), prompt.getPwd())) {
             LMMessage error = new LMMessage();
             return error;
         }
@@ -97,13 +97,13 @@ public class UserService implements UserUseCase {
 
     @Override
     public Boolean checkPwd(String email, String pwd) throws ExecutionException, InterruptedException {
-        User user = repository.getUserByEmail(email);
+        UserStorage user = repository.getUserByEmail(email);
         return user.checkPwd(pwd);
     }
 
     @Override
     public Boolean isUserExisted(String email) throws ExecutionException, InterruptedException {
-        User user = repository.getUserByEmail(email);
+        UserStorage user = repository.getUserByEmail(email);
         if (user != null) {
             return true;
         }
