@@ -1,6 +1,7 @@
 package poateto.final4j.Repository;
 
 import poateto.final4j.DB.UserDatabase;
+import poateto.final4j.Entity.LMMessage;
 import poateto.final4j.Entity.UserStorage;
 import poateto.final4j.Entity.UserStorage;
 
@@ -38,7 +39,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public String responseMessage(String email, String message) throws ExecutionException, InterruptedException {
+    public String responseMessage(String email, LMMessage message) throws ExecutionException, InterruptedException {
         user = db.getUserByEmail(email);
         user.responsedMsg(message);
         String msg = db.sendMessage(user);

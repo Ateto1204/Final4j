@@ -88,7 +88,8 @@ public class UserService implements UserUseCase {
         }
 
         String response = handler.sendMessage(selectModel, prompt.getMessage());
-        repository.responseMessage(prompt.getEmail(), response);
+        LMMessage responseMsg = new LMMessage(selectModel.name(), response);
+        repository.responseMessage(prompt.getEmail(), responseMsg);
         LMMessage output = new LMMessage(selectModel.toString(), response);
 
         System.out.println(output.getModel() + " " + output.getMessage());
