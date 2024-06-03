@@ -87,7 +87,7 @@ async function loadHistoryMessage() {
         console.log("Failed: " + err);
     }
 
-    getHistoryMessage(sentMsg, responsedMsg, 'openai');
+    getHistoryMessage(sentMsg, responsedMsg);
 }
 
 window.addEventListener("load", start, false);

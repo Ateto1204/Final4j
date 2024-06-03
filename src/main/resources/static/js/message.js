@@ -93,11 +93,11 @@ async function sendMessageToLM(message) {
     }
 }
 
-function getHistoryMessage(userMessage, botMessage, model) {
+function getHistoryMessage(userMessage, botMessage) {
     let len = userMessage.length;
 
     for(let i = 0; i < len; i++){
         addUserMessage(userMessage[i]);
-        addBotMessage(model, botMessage[i]);
+        addBotMessage(botMessage[i].model, botMessage[i].message);
     }
 }
