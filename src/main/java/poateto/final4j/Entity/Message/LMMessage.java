@@ -1,6 +1,4 @@
-package poateto.final4j.Entity;
-
-import poateto.final4j.UseCases.Components.LanguageModelType;
+package poateto.final4j.Entity.Message;
 
 public class LMMessage extends MessageEntity {
 

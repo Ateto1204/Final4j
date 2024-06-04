@@ -7,7 +7,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
-import poateto.final4j.Entity.UserStorage;
+import poateto.final4j.Entity.User.UserStorage;
 
 import java.util.concurrent.ExecutionException;
 

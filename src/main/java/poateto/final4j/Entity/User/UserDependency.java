@@ -1,4 +1,4 @@
-package poateto.final4j.Entity;
+package poateto.final4j.Entity.User;
 
 public interface UserDependency {
     String getEmail();

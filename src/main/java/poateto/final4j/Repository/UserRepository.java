@@ -1,10 +1,9 @@
 package poateto.final4j.Repository;
 
 
-import poateto.final4j.Entity.LMMessage;
-import poateto.final4j.Entity.UserStorage;
+import poateto.final4j.Entity.Message.LMMessage;
+import poateto.final4j.Entity.User.UserStorage;
 
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public interface UserRepository {

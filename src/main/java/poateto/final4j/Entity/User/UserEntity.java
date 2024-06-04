@@ -1,4 +1,4 @@
-package poateto.final4j.Entity;
+package poateto.final4j.Entity.User;
 
 public class UserEntity implements UserDependency {
     private String email;

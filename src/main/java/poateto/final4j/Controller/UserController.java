@@ -1,9 +1,8 @@
 package poateto.final4j.Controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import poateto.final4j.Entity.*;
-import poateto.final4j.UseCases.Components.NotifyStatus;
+import poateto.final4j.Entity.Message.LMMessage;
+import poateto.final4j.Entity.User.*;
 import poateto.final4j.UseCases.Service.UserService;
 import poateto.final4j.UseCases.Service.UserUseCase;
 

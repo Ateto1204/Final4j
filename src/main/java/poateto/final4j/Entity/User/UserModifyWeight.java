@@ -1,6 +1,6 @@
-package poateto.final4j.Entity;
+package poateto.final4j.Entity.User;
 
-import poateto.final4j.UseCases.Components.LanguageModelType;
+import poateto.final4j.Entity.User.UserEntity;
 import poateto.final4j.UseCases.Components.NotifyStatus;
 
 public class UserModifyWeight extends UserEntity {

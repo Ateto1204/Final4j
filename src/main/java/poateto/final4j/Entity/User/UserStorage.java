@@ -1,6 +1,6 @@
-package poateto.final4j.Entity;
+package poateto.final4j.Entity.User;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import poateto.final4j.Entity.Message.LMMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
