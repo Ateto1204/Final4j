@@ -4,15 +4,15 @@ fetchMock.enableMocks();
 import { isUserExisted, findUserByEmail, showLogin, start } from '../../../main/resources/static/js/login';
 
 beforeEach(() => {
-  fetch.resetMocks();
-  document.body.innerHTML = `
-    <div id="login-div" style="display: none;"></div>
-    <div id="register-div" style="display: none;"></div>
-    <button id="login-toggle" class="active"></button>
-    <button id="register-toggle"></button>
-    <form id="login-form"></form>
-    <form id="register-form"></form>
-  `;
+    fetch.resetMocks();
+    document.body.innerHTML = `
+        <div id="login-div" style="display: none;"></div>
+        <div id="register-div" style="display: none;"></div>
+        <button id="login-toggle" class="active"></button>
+        <button id="register-toggle"></button>
+        <form id="login-form"></form>
+        <form id="register-form"></form>
+    `;
 });
 
 test('should check if user exists', async () => {
