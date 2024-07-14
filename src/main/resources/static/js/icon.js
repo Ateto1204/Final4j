@@ -71,3 +71,5 @@ async function modifyWeight(model, status) {
         console.log("Failed: " + err);
     }
 }
+
+module.exports = { addLikeIcon, addModelLogo };

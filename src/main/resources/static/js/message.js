@@ -101,3 +101,5 @@ function getHistoryMessage(userMessage, botMessage) {
         addBotMessage(botMessage[i].model, botMessage[i].message);
     }
 }
+
+module.exports = { isMessage, toMessage };
