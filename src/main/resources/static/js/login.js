@@ -159,3 +159,5 @@ async function userRegister(event) {
 }
 
 window.addEventListener("load", start, false);
+
+module.exports = { isUserExisted, findUserByEmail, showLogin, start };
