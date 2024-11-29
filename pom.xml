@@ -28,34 +28,46 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.firebase</groupId>
 			<artifactId>firebase-admin</artifactId>
 			<version>9.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>dev.langchain4j</groupId>
-			<artifactId>langchain4j-open-ai</artifactId>
-			<version>0.31.0</version>
-		</dependency>
-		<dependency>
-			<groupId>dev.langchain4j</groupId>
-			<artifactId>langchain4j-anthropic</artifactId>
-			<version>0.31.0</version>
-		</dependency>
+
 		<dependency>
 			<groupId>dev.langchain4j</groupId>
 			<artifactId>langchain4j</artifactId>
-			<version>0.31.0</version>
+			<version>0.36.2</version>
 		</dependency>
+
 		<dependency>
-			<groupId>com.cohere</groupId>
-			<artifactId>cohere-java</artifactId>
-			<version>1.0.4</version>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-core</artifactId>
+			<version>0.36.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-cohere</artifactId>
+			<version>0.36.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-open-ai</artifactId>
+			<version>0.36.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dev.langchain4j</groupId>
+			<artifactId>langchain4j-google-ai-gemini</artifactId>
+			<version>0.36.2</version>
 		</dependency>
 
 		<dependency>
@@ -72,6 +84,7 @@
 			<groupId>com.google.cloud</groupId>
 			<artifactId>google-cloud-vertexai</artifactId>
 		</dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

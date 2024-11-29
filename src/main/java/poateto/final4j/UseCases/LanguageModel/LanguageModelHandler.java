@@ -42,12 +42,10 @@ public class LanguageModelHandler {
     public String sendMessage(LanguageModelType modelType, String prompt) {
         String response = "Error occur, please try again";
         try {
-            if (modelType == OPENAI) {
-                model = OpenAiModel.getInstance();
-            } else if (modelType == COHERE) {
-                model = CohereModel.getInstance();
-            } else if (modelType == GEMINI) {
-                model = GeminiModel.getInstance();
+            switch(modelType){
+                case OPENAI: model = OpenAiModel.getInstance(); break;
+                case COHERE: model = CohereModel.getInstance(); break;
+                case GEMINI: model = GeminiModel.getInstance(); break;
             }
             response = model.sendMessage(prompt);
         } catch (Exception exception) {
